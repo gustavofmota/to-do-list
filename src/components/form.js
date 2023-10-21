@@ -1,9 +1,20 @@
 import React from 'react'
 
 const Form = ({ handleSetViewState, handleAddTask }) => {
+
+    const onKeyDown = (e) => {
+		if (e.keyCode === 13) {
+			handleAddTask(document.getElementById('newTask').value)
+		}
+	}
 	return (
 		<div>
-			<input type='text' name='newTask' id='newTask' />
+			<input
+				type='text'
+				name='newTask'
+				id='newTask'
+				onKeyDown={(e) => onKeyDown(e)}
+			/>
 			<button
 				type='button'
 				onClick={() =>
