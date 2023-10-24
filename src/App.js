@@ -11,7 +11,6 @@ function App() {
 	const [popUpDisplayState, setPopUpDisplayState] = useState('')
 	const viewsType = ['All', 'Completed', 'To-Do']
 
-	console.log(values)
 
 	const [popupMessage, setPopupMessage] = useState(null)
 
