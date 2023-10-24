@@ -1,12 +1,14 @@
 import React from 'react'
 import PopUp from './PopUp'
+import './WarningPopUp.css'
 
 class WarningPopUp extends PopUp {
 	render() {
 		return (
-			<div className='WarningPopUp'>
+			<div className={`WarningPopUp ${this.props.displayState}`}>
 				<div className='WarningPopUp-content'>
 					<div className='WarningPopUp-header'>
+						<div className='title'>Warning!! &#9888;</div>
 						<div
 							className='closing-X'
 							onClick={() =>

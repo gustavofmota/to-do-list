@@ -1,11 +1,16 @@
 import React from 'react'
 
 const Form = ({ handleSetViewState, handleAddTask, showPopup }) => {
+
+	const verifyForm = () => {
+		if (document.getElementById('newTask').value)
+			handleAddTask(document.getElementById('newTask'))
+		else showPopup('Invalid input. Please enter a task name')
+	}
+
 	const onKeyDown = (e) => {
 		if (e.keyCode === 13) {
-			if (document.getElementById('newTask').value)
-				handleAddTask(document.getElementById('newTask').value)
-			else showPopup('Invalid input. Please enter a task name')
+			verifyForm()
 		}
 	}
 	return (
@@ -18,12 +23,7 @@ const Form = ({ handleSetViewState, handleAddTask, showPopup }) => {
 					placeholder='Type Here'
 					onKeyDown={(e) => onKeyDown(e)}
 				/>
-				<button
-					type='button'
-					onClick={() =>
-						handleAddTask(document.getElementById('newTask').value)
-					}
-				>
+				<button type='button' onClick={() => verifyForm()}>
 					Add Task
 				</button>
 			</div>

@@ -20,12 +20,16 @@ const TodoListTable = ({ data, viewState, handleCheckBoxChange }) => {
 				{whatViewState().map((item) => (
 					<tr key={item.id}>
 						<td>
-							<input
-								type='checkbox'
-								onChange={() => handleCheckBoxChange(item.id)}
-								checked={item.isCompleted}
-							/>
-							<label>{item.name}</label>
+							<div className='task'>
+								<input
+									type='checkbox'
+									onChange={() =>
+										handleCheckBoxChange(item.id)
+									}
+									checked={item.isCompleted}
+								/>
+								<label>{item.name}</label>
+							</div>
 						</td>
 					</tr>
 				))}

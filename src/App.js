@@ -8,6 +8,8 @@ function App() {
 	const [viewState, setViewState] = useState(0) //this will alternate the view 0=all, 1=completed, 2=todo
 	const [values, setValues] = useState([]) //this will save the values and update the state of each task
 	const [idCounter, setIdCounter] = useState(0) //this will always generate a unique id for each task
+	const [popUpDisplayState, setPopUpDisplayState] = useState('')
+	const viewsType = ['All', 'Completed', 'To-Do']
 
 	console.log(values)
 
@@ -16,12 +18,14 @@ function App() {
 	const showPopup = useCallback(
 		(newMessage) => {
 			setPopupMessage(newMessage)
+			setPopUpDisplayState('visible')
 		},
 		[setPopupMessage]
 	)
 
 	const resetPopup = useCallback(() => {
 		setPopupMessage(null)
+		setPopUpDisplayState('')
 	}, [setPopupMessage])
 
 	/**
@@ -32,16 +36,12 @@ function App() {
 	 * Target will be the name of the task to be added to the list
 	 */
 	function handleAddTask(target) {
-		try {
-			if (target.trim() === '') throw 'Cannot add empty task'
-			setValues([
-				...values,
-				{ id: idCounter, name: target, isCompleted: false },
-			])
-			setIdCounter(idCounter + 1)
-		} catch (err) {
-			// WarningPopUp('Error:' + err + '.')
-		}
+		setValues([
+			...values,
+			{ id: idCounter, name: target.value, isCompleted: false },
+		])
+		setIdCounter(idCounter + 1)
+		target.value = ''
 	}
 
 	function handleSetViewState(e) {
@@ -60,22 +60,26 @@ function App() {
 	}
 
 	return (
-		<div className='App'>
-			<TodoListTable
-				data={values}
-				viewState={viewState}
-				handleCheckBoxChange={handleCheckBoxChange}
+		<>
+			<WarningPopUp
+				value={popupMessage}
+				onClose={resetPopup}
+				displayState={popUpDisplayState}
 			/>
-			{popupMessage ? (
-				<WarningPopUp value={popupMessage} onClose={resetPopup} />
-			) : (
+			<div className='App'>
+				<header>{viewsType[viewState]}</header>
+				<TodoListTable
+					data={values}
+					viewState={viewState}
+					handleCheckBoxChange={handleCheckBoxChange}
+				/>
 				<Form
 					handleSetViewState={handleSetViewState}
 					handleAddTask={handleAddTask}
 					showPopup={showPopup}
 				/>
-			)}
-		</div>
+			</div>
+		</>
 	)
 }
 
