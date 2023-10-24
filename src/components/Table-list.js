@@ -1,7 +1,6 @@
 import React from 'react'
 
 const TodoListTable = ({ data, viewState, handleCheckBoxChange }) => {
-	console.log(viewState)
 	function whatViewState() {
 		switch (viewState) {
 			case '0':
@@ -26,9 +25,6 @@ const TodoListTable = ({ data, viewState, handleCheckBoxChange }) => {
 								onChange={() => handleCheckBoxChange(item.id)}
 								checked={item.isCompleted}
 							/>
-						</td>
-						{/*Is completed?*/}
-						<td>
 							<label>{item.name}</label>
 						</td>
 					</tr>
