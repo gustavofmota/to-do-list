@@ -5,7 +5,7 @@ const Form = ({ handleSetViewState, handleAddTask, showPopup }) => {
 	const verifyForm = () => {
 		if (document.getElementById('newTask').value)
 			handleAddTask(document.getElementById('newTask'))
-		else showPopup('Invalid input. Please enter a task name')
+		else showPopup('Invalid input. Please enter a task name!')
 	}
 
 	const onKeyDown = (e) => {

@@ -2,15 +2,14 @@ import './App.css'
 import TodoListTable from './components/Table-list.js'
 import Form from './components/Form.js'
 import WarningPopUp from './components/WarningPopUp.js'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 function App() {
-	const [viewState, setViewState] = useState(0) //this will alternate the view 0=all, 1=completed, 2=todo
+	const [viewState, setViewState] = useState('0') //this will alternate the view 0=all, 1=completed, 2=todo
 	const [values, setValues] = useState([]) //this will save the values and update the state of each task
 	const [idCounter, setIdCounter] = useState(0) //this will always generate a unique id for each task
 	const [popUpDisplayState, setPopUpDisplayState] = useState('')
 	const viewsType = ['All', 'Completed', 'To-Do']
-
 
 	const [popupMessage, setPopupMessage] = useState(null)
 
